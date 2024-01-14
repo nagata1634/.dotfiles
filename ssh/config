@@ -1,0 +1,7 @@
+
+Host GitHub
+  HostName github.com
+  IdentityFile ~/.ssh/id_ed25519
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+  User git
