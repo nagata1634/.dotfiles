@@ -1,0 +1,9 @@
+set -g status on
+set -g status-interval 1
+set -g status-position top
+set -g status-justify centre
+set -g status-left "[#I]"
+
+# pane status bar
+set -g pane-border-status bottom
+set -p pane-border-format "[#{pane_index}] #{pane_current_path}"

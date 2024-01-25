@@ -1,13 +1,17 @@
 # Set up unicode
 export LANG=ja_JP.UTF-8
 
-# Set up the prompt
-autoload -Uz promptinit
-promptinit
-prompt adam1
+# Environmental variables
+source $HOME/.dotfiles/zsh/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
 
-setopt histignorealldups sharehistory
-
+# Set PROMPT
+setopt PROMPT_SUBST
+PROMPT='$(__git_ps1)%F{cyan} →%f '
+RPROMPT='%(?.%F{green}✔%f.%F{red}✘%f)'
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
@@ -21,7 +25,7 @@ autoload -Uz compinit
 compinit
 
 # Use color ls
-if [ "$(uname -s)"=="Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
   alias ls="ls -G"
   # source $HOME/.dotfiles/zsh/.zsh_alias_for_mac
 else
@@ -29,21 +33,29 @@ else
   # source $HOME/.dotfiles/zsh/.zsh_alias_for_GNU
 fi
 
-# prompt
+# SSHかどうかを判別
+if [ -n "$SSH_CONNECTION" ]; then
+  COPY_COMMAND="wshcopy"
+else
+  COPY_COMMAND="pbcopy"
+fi
+
+# Completion
 source $HOME/.dotfiles/zsh/.zsh_completion
 
 # pyenv PATH
-if [ -e "PYTNV_PATH" ]; then
+if [ -e "$HOME/PYTNV_PATH" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
 fi
-
 # Autostart tmux
 if [ ! "$(tmux has-session -t 1 2>/dev/null)" ]; then
   tmux
 else
   tmux attach-session
 fi
-# Environmental variables
-export TMUX_HOSTNAME="$(hostname -s)"
+
+
+
+
