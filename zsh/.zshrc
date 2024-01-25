@@ -8,9 +8,19 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
+function git_color() {
+  local git_info="$(__git_ps1 "%s")"
+  if [[ $git_info == *"%"* ]] || [[ $git_info == *"*"* ]]; then
+    echo '%F{red}'
+  elif [[ $git_info == *"+"* ]]; then
+    echo '%F{green}'
+  else
+    echo '%F{cyan}'
+  fi
+}
 # Set PROMPT
 setopt PROMPT_SUBST
-PROMPT='$(__git_ps1)%F{cyan} →%f '
+PROMPT='$(git_color)$(__git_ps1)%F{cyan} →%f '
 RPROMPT='%(?.%F{green}✔%f.%F{red}✘%f)'
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
