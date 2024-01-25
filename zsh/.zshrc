@@ -8,6 +8,8 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
+setopt PROMPT_SUBST
+
 function git_color() {
   local git_info="$(__git_ps1 "%s")"
   if [[ $git_info == *"%"* ]] || [[ $git_info == *"*"* ]]; then
