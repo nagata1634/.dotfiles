@@ -55,19 +55,9 @@ fi
 # Completion
 source $HOME/.dotfiles/zsh/.zsh_completion
 
-# pyenv PATH
-if [ -e "$HOME/PYTNV_PATH" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-fi
 # Autostart tmux
 if [ ! "$(tmux has-session -t 1 2>/dev/null)" ]; then
   tmux
 else
   tmux attach-session
 fi
-
-
-
-
