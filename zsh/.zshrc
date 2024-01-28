@@ -39,6 +39,11 @@ compinit
 # Use color ls
 if [ "$(uname -s)" = "Darwin" ]; then
   alias ls="ls -G"
+  alias v="nvim"
+  alias ga="git add"
+  alias gcm="git commit -m "
+  alias gpl="git pull"
+  alias gph="git push"
   # source $HOME/.dotfiles/zsh/.zsh_alias_for_mac
 else
   echo 'Mac OSではありません'
