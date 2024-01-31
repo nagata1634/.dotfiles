@@ -25,3 +25,5 @@ function path_setting_file() {
         fi
     done
 }
+
+path_setting_file
