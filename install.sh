@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 # それぞれのファイルパス
 
 declare -A config_path
